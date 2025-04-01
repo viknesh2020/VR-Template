@@ -88,15 +88,6 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-    "com.meta.xr.sdk.voice.dictation": {
-      "version": "64.0.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.meta.xr.sdk.voice": "64.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.meta.xr.simulator": {
       "version": "74.0.0",
       "depth": 1,

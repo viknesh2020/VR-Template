@@ -24,7 +24,7 @@ public class VoiceToImage : MonoBehaviour
 
     private void OnVoiceInputReceived(string prompt)
     {
-        debugText.text ="Voice Input: " + prompt;
+        //debugText.text +="Voice Input: " + prompt+"\n";
         StartCoroutine(GenerateImage(prompt));
     }
 
@@ -41,13 +41,14 @@ public class VoiceToImage : MonoBehaviour
             
             request.certificateHandler = new AcceptAllCertificates(); // Allow HTTP
 
-            debugText.text = "\nSending request to: " + apiURL;
+            //debugText.text += "\nSending request to: " + apiURL;
             yield return request.SendWebRequest();
+            //debugText.text += "\nRequest finished with result: " + request.result;
 
             if (request.result == UnityWebRequest.Result.Success)
             {
                 string responseJson = request.downloadHandler.text;
-                debugText.text = "\nResponse: " + responseJson;  // ✅ Log the response
+                //debugText.text += "\nResponse: " + responseJson;  // ✅ Log the response
 
                 StableDiffusionResponse response = JsonUtility.FromJson<StableDiffusionResponse>(responseJson);
                 if (response != null && response.images.Length > 0)
@@ -56,12 +57,14 @@ public class VoiceToImage : MonoBehaviour
                 }
                 else
                 {
-                    debugText.text = "\nNo images in response.";
+                    //debugText.text += "\nNo images in response.";
                 }
             }
             else
             {
-                debugText.text = "\nError: " + request.error;
+                /*debugText.text += "\nError: " + request.error;
+                debugText.text += "\nResponse Code: " + request.responseCode;
+                debugText.text += "\nResponse Text: " + request.downloadHandler.text;*/
             }
         }
     }
@@ -74,7 +77,7 @@ public class VoiceToImage : MonoBehaviour
 
         Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
         uiImage.sprite = newSprite;
-        debugText.text = "\nSprite loaded: " + newSprite.name;
+        //debugText.text += "\nSprite loaded: " + newSprite.name;
 
         yield return null;
     }
